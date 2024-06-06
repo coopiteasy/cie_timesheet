@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright 2020 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record
+        id="act_hr_timesheet_sheet_2_hr_analytic_timesheet"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Timesheets</field>
+        <field name="res_model">account.analytic.line</field>
+        <field name="context">{'search_default_sheet_id': active_id}</field>
+    </record>
+
+    <record id="hr_timesheet_sheet_form" model="ir.ui.view">
+        <field name="name">hr.timesheet.sheet.form</field>
+        <field name="model">hr_timesheet.sheet</field>
+        <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <!--
+                         this first button (and its action) has been copied
+                         from the hr_timesheet_sheet odoo module version 9, as
+                         it had been removed in version 10, as well as the
+                         total time property.
+                    -->
+                    <button
+                        type="action"
+                        name="%(act_hr_timesheet_sheet_2_hr_analytic_timesheet)d"
+                        class="oe_stat_button"
+                        icon="fa-clock-o"
+                    >
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="total_time" widget="float_time" />
+                            </span>
+                            <span class="o_stat_text">Timesheet</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='date_start']/.." position="after">
+                <field name="daily_working_time" widget="float_time" />
+                <field
+                    name="daily_overtime"
+                    widget="float_time"
+                    decoration-warning="daily_overtime &lt; 0"
+                    decoration-info="daily_overtime &gt;= 0"
+                />
+                <field
+                    name="total_overtime"
+                    widget="float_time"
+                    decoration-warning="total_overtime &lt; 0"
+                    decoration-info="total_overtime &gt;= 0"
+                />
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="hr_timesheet_sheet_tree" model="ir.ui.view">
+        <field name="name">hr.timesheet.sheet.tree</field>
+        <field name="model">hr_timesheet.sheet</field>
+        <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_tree" />
+        <field name="arch" type="xml">
+            <field name="total_time" position="before">
+                <field name="working_time" widget="float_time" />
+            </field>
+            <field name="total_time" position="after">
+                <field name="timesheet_overtime" widget="float_time" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_hr_timesheet_sheet_filter" model="ir.ui.view">
+        <field name="name">hr.timesheet.sheet.filter</field>
+        <field name="model">hr_timesheet.sheet</field>
+        <field
+            name="inherit_id"
+            ref="hr_timesheet_sheet.view_hr_timesheet_sheet_filter"
+        />
+        <field name="arch" type="xml">
+
+            <filter name="message_needaction" position="after">
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
+            </filter>
+
+        </field>
+    </record>
+
+    <menuitem
+        name="Overtime"
+        id="menu_hr_timesheet_overtime"
+        sequence="99"
+        parent="hr_timesheet.timesheet_menu_root"
+    />
+
+    <menuitem
+        name="Overtime Rate"
+        id="menu_hr_timesheet_overtime_rate"
+        sequence="100"
+        parent="menu_hr_timesheet_overtime"
+        groups="hr.group_hr_manager"
+        action="action_resource_overtime_form"
+    />
+
+</odoo>

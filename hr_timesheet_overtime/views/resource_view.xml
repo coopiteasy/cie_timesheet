@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright 2020 Coop IT Easy
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_resource_overtime_search" model="ir.ui.view">
+        <field name="name">resource.overtime.search</field>
+        <field name="model">resource.overtime</field>
+        <field name="arch" type="xml">
+            <search string="Search Overtime Rate">
+                <field name="name" string="Overtime Rate" />
+                <field name="manager" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </search>
+        </field>
+    </record>
+
+    <record id="resource_overtime_form" model="ir.ui.view">
+        <field name="name">resource.overtime.form</field>
+        <field name="model">resource.overtime</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Rate">
+                <group>
+                    <field name="name" />
+                    <field name="manager" />
+                    <field name="company_id" groups="base.group_multi_company" />
+                </group>
+                <field name="rate_ids" />
+            </form>
+        </field>
+    </record>
+
+    <record id="view_resource_overtime_tree" model="ir.ui.view">
+        <field name="name">resource.overtime.tree</field>
+        <field name="model">resource.overtime</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="manager" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_resource_overtime_form" model="ir.actions.act_window">
+        <field name="name">Overtime Rate</field>
+        <field name="res_model">resource.overtime</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_resource_overtime_search" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Define rate
+            </p>
+        </field>
+    </record>
+
+
+    <record id="view_resource_overtime_rate_tree" model="ir.ui.view">
+        <field name="name">resource.overtime.rate.tree</field>
+        <field name="model">resource.overtime.rate</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" />
+                <field name="dayofweek" />
+                <field name="rate" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_resource_overtime_rate_form" model="ir.ui.view">
+        <field name="name">resource.overtime.rate.form</field>
+        <field name="model">resource.overtime.rate</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Rate">
+                <group>
+                    <field name="name" />
+                    <field name="dayofweek" />
+                    <field name="rate" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <menuitem
+        action="action_resource_overtime_form"
+        id="menu_resource_overtime"
+        parent="resource.menu_resource_config"
+        sequence="4"
+    />
+
+</odoo>

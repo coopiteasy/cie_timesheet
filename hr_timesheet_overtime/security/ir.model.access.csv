@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_resource_overtime,resource.overtime,model_resource_overtime,hr.group_hr_user,1,1,1,1
+access_resource_overtime_rate,resource.overtime.rate,model_resource_overtime_rate,hr.group_hr_user,1,1,1,1
+access_resource_overtime_rate_user,resource.overtime.rate,model_resource_overtime_rate,base.group_user,1,0,0,0

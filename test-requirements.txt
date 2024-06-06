@@ -1,0 +1,2 @@
+git+https://github.com/coopiteasy/addons@16.0#subdirectory=setup/company_today
+git+https://github.com/coopiteasy/addons@16.0#subdirectory=setup/resource_work_time_from_contracts
