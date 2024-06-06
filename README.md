@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [hr_timesheet_auto_creation](hr_timesheet_auto_creation/) | 16.0.1.0.1 |  | Create weekly timesheets for employees automatically
+[hr_timesheet_overtime](hr_timesheet_overtime/) | 16.0.2.0.0 |  | Overtime Calculation
 [hr_timesheet_project_prevent_creation](hr_timesheet_project_prevent_creation/) | 16.0.1.0.0 | [![carmenbianca](https://github.com/carmenbianca.png?size=30px)](https://github.com/carmenbianca) | Prevent creation of projects and tasks from timesheets.
 [hr_timesheet_sheet_current](hr_timesheet_sheet_current/) | 16.0.1.0.0 |  | Allow to access the current timesheet sheet directly from the menu
 
