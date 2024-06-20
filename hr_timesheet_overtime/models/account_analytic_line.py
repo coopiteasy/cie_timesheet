@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -15,9 +15,11 @@ class AnalyticLine(models.Model):
 
     _inherit = "account.analytic.line"
 
-    def create(self, values):
-        self._update_values(values)
-        return super().create(values)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self._update_values(vals)
+        return super().create(vals_list)
 
     def write(self, values):
         if not self.env.context.get("create"):  # sale module
