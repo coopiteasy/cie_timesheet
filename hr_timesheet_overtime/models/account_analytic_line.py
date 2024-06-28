@@ -15,10 +15,11 @@ class AnalyticLine(models.Model):
 
     _inherit = "account.analytic.line"
 
-    @api.model
-    def create(self, values):
-        self._update_values(values)
-        return super().create(values)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self._update_values(vals)
+        return super().create(vals_list)
 
     @api.multi
     def write(self, values):
@@ -32,17 +33,19 @@ class AnalyticLine(models.Model):
         Update values if date or unit_amount fields have changed
         """
         if "date" in values or "unit_amount" in values:
+            # TODO: self.date and self.unit_amount do not exist when called from
+            # create().
             date = values.get("date", self.date)
             unit_amount = values.get("unit_amount", self.unit_amount)
+            values["unit_amount"] = unit_amount * self.rate_for_date(date)
 
-            # rate management
-            weekday = fields.Date.from_string(date).weekday()
-            rate = (
-                self.env["resource.overtime.rate"]
-                .search([("dayofweek", "=", weekday)], limit=1)
-                .rate
-                or 1.0
-            )
-
-            # update
-            values["unit_amount"] = unit_amount * rate
+    @api.model
+    def rate_for_date(self, date):
+        # n.b. from_string also works on date objects, returning itself.
+        weekday = fields.Date.from_string(date).weekday()
+        return (
+            self.env["resource.overtime.rate"]
+            .search([("dayofweek", "=", weekday)], limit=1)
+            .rate
+            or 1.0
+        )
