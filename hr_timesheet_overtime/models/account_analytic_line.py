@@ -31,8 +31,10 @@ class AnalyticLine(models.Model):
         Update values if date or unit_amount fields have changed
         """
         if "date" in values or "unit_amount" in values:
-            # TODO: self.date and self.unit_amount do not exist when called from
-            # create().
+            # If called from create() without unit_amount, don't do anything.
+            # This preserves the default value.
+            if not self and "unit_amount" not in values:
+                return
             date = values.get("date", self.date)
             unit_amount = values.get("unit_amount", self.unit_amount)
             values["unit_amount"] = unit_amount * self.rate_for_date(date)
