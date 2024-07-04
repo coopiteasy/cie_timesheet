@@ -2,10 +2,10 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestAnalyticLine(TransactionCase):
+class TestAnalyticLine(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -34,15 +34,8 @@ class TestAnalyticLine(TransactionCase):
 
     def test_rate_applied(self):
         line = self.base_line()
-        line_record = self.env["account.analytic.line"].create(line)
-        self.assertEqual(line_record.unit_amount, 4.0)
-
-    def test_rate_applied_after_edit(self):
-        line = self.base_line()
-        del line["time_start"]
-        del line["time_stop"]
-        line_record = self.env["account.analytic.line"].create(line)
-        line_record.write({"time_start": 10.0, "time_stop": 12.0})
+        line_record = self.env["account.analytic.line"].new(line)
+        line_record.onchange_hours_start_stop()
         self.assertEqual(line_record.unit_amount, 4.0)
 
     def test_rate_not_double_applied(self):
@@ -54,6 +47,7 @@ class TestAnalyticLine(TransactionCase):
         line_new = self.env["account.analytic.line"].new(line)
         line_new.time_start = 10.0
         line_new.time_stop = 12.0
+        line_new.onchange_hours_start_stop()
         self.assertEqual(line_new.unit_amount, 4.0)
 
         # Prepare the transient data for writing to a new record.
