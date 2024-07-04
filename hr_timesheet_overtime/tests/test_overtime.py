@@ -421,3 +421,34 @@ class TestOvertime(SavepointCase):
             self.assertEqual(self.ts1.working_time, 9 * 5)
             # Affected by the extra overtime
             self.assertEqual(self.ts1.timesheet_overtime, 2)
+
+    def test_write_multiple_lines(self):
+        """When writing multiple analytic lines, overtime rates are applied
+        separately to each record.
+        """
+        overtime = self.env["resource.overtime"].create({"name": "test"})
+        self.env["resource.overtime.rate"].create(
+            {
+                "name": "test",
+                "dayofweek": "0",  # Monday
+                "rate": 2.0,
+                "overtime_id": overtime.id,
+            }
+        )
+
+        lines = self.env["account.analytic.line"].browse()
+        # monday and tuesday
+        for day in range(9, 11):
+            lines += self.env["account.analytic.line"].create(
+                {
+                    "project_id": self.project_01.id,
+                    "amount": 0.0,
+                    "date": date(2019, 12, day),
+                    "name": "-",
+                    "employee_id": self.employee1.id,
+                }
+            )
+        lines.write({"unit_amount": 1})
+
+        self.assertEqual(lines[0].unit_amount, 2)
+        self.assertEqual(lines[1].unit_amount, 1)
