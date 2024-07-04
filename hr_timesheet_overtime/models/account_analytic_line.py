@@ -23,8 +23,14 @@ class AnalyticLine(models.Model):
 
     def write(self, values):
         if not self.env.context.get("create"):  # sale module
-            self._update_values(values)
-        return super().write(values)
+            for record in self:
+                # TODO: this is slow and inefficient.
+                vals_copy = values.copy()
+                record._update_values(vals_copy)
+                super(AnalyticLine, record).write(vals_copy)
+            return True
+        else:
+            return super().write(values)
 
     def _update_values(self, values):
         """
