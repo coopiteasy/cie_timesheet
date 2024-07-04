@@ -15,27 +15,29 @@ class AnalyticLine(models.Model):
 
     _inherit = "account.analytic.line"
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            self._update_values(vals)
-        return super().create(vals_list)
+    hours_worked = fields.Float(
+        default=0.0,
+    )
+    # Override to be a computed field.
+    unit_amount = fields.Float(
+        # We use a kind of custom name here because `hr_timesheet_begin_end`
+        # also overrides this, and the two compute methods are not necessarily
+        # compatible.
+        compute="_compute_unit_amount_from_hours",
+        store=True,
+        readonly=False,
+        # This triggers computation on creation. default=False and default=0 do
+        # not trigger computation.
+        default=None,
+    )
 
-    def write(self, values):
-        if not self.env.context.get("create"):  # sale module
-            self._update_values(values)
-        return super().write(values)
-
-    def _update_values(self, values):
-        """
-        Update values if date or unit_amount fields have changed
-        """
-        if "date" in values or "unit_amount" in values:
-            # TODO: self.date and self.unit_amount do not exist when called from
-            # create().
-            date = values.get("date", self.date)
-            unit_amount = values.get("unit_amount", self.unit_amount)
-            values["unit_amount"] = unit_amount * self.rate_for_date(date)
+    # TODO: should this also depend on resource.overtime.rate, somehow?
+    @api.depends("hours_worked", "date")
+    def _compute_unit_amount_from_hours(self):
+        # Do not compute/adjust the unit_amount of non-timesheets.
+        lines = self.filtered(lambda line: line.project_id)
+        for line in lines:
+            line.unit_amount = line.hours_worked * line.rate_for_date(line.date)
 
     @api.model
     def rate_for_date(self, date):
