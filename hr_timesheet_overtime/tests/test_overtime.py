@@ -72,7 +72,7 @@ class TestOvertime(TransactionCase):
                 "date": "2019-12-02",
                 "name": "-",
                 "sheet_id": cls.ts1.id,
-                "hours_worked": 10.0,  # 1 hour overtime
+                "unit_amount": 10.0,  # 1 hour overtime
                 "user_id": cls.employee1.user_id.id,
             }
         )
@@ -85,7 +85,7 @@ class TestOvertime(TransactionCase):
                     "date": date(2019, 12, day),
                     "name": "-",
                     "sheet_id": cls.ts1.id,
-                    "hours_worked": 9.0,  # expected time
+                    "unit_amount": 9.0,  # expected time
                     "user_id": cls.employee1.user_id.id,
                 }
             )
@@ -121,7 +121,7 @@ class TestOvertime(TransactionCase):
                     "date": date(2019, 12, day),
                     "name": "-",
                     "sheet_id": ts2.id,
-                    "hours_worked": 10.0,  # 1 hour overtime
+                    "unit_amount": 10.0,  # 1 hour overtime
                     "user_id": self.employee1.user_id.id,
                 }
             )
@@ -134,7 +134,7 @@ class TestOvertime(TransactionCase):
                     "date": date(2019, 12, day),
                     "name": "-",
                     "sheet_id": ts2.id,
-                    "hours_worked": 9.0,  # expected time
+                    "unit_amount": 9.0,  # expected time
                     "user_id": self.employee1.user_id.id,
                 }
             )
@@ -182,7 +182,7 @@ class TestOvertime(TransactionCase):
                 "date": "2019-12-09",
                 "name": "-",
                 "sheet_id": ts2.id,
-                "hours_worked": 10.0,  # 1 hour overtime
+                "unit_amount": 10.0,  # 1 hour overtime
                 "user_id": self.employee1.user_id.id,
             }
         )
@@ -195,7 +195,7 @@ class TestOvertime(TransactionCase):
                     "date": date(2019, 12, day),
                     "name": "-",
                     "sheet_id": ts2.id,
-                    "hours_worked": 9.0,  # expected time
+                    "unit_amount": 9.0,  # expected time
                     "user_id": self.employee1.user_id.id,
                 }
             )
@@ -256,7 +256,7 @@ class TestOvertime(TransactionCase):
                 "date": "2020-01-06",
                 "name": "-",
                 "sheet_id": self.ts2.id,
-                "hours_worked": 9.0,  # expected time from previous contract
+                "unit_amount": 9.0,  # expected time from previous contract
                 "user_id": self.employee1.user_id.id,
             }
         )
@@ -270,7 +270,7 @@ class TestOvertime(TransactionCase):
                     "date": date(2020, 1, day),
                     "name": "-",
                     "sheet_id": self.ts2.id,
-                    "hours_worked": 4.0,  # expected time from new contract
+                    "unit_amount": 4.0,  # expected time from new contract
                     "user_id": self.employee1.user_id.id,
                 }
             )
@@ -301,7 +301,7 @@ class TestOvertime(TransactionCase):
                     "date": date(2019, 12, day),
                     "name": "-",
                     "sheet_id": ts2.id,
-                    "hours_worked": 10.0,  # 1 hour overtime
+                    "unit_amount": 10.0,  # 1 hour overtime
                     "user_id": self.employee1.user_id.id,
                 }
             )
@@ -406,8 +406,7 @@ class TestOvertime(TransactionCase):
                 ("sheet_id", "=", self.ts1.id),
             ]
         )
-        line.hours_worked = 10
-        self.assertEqual(line.unit_amount, 10)
+        line.unit_amount = 10
         self.assertEqual(self.ts1.timesheet_overtime_trimmed, 2)
         self.assertEqual(self.ts1.timesheet_overtime, 2)
         self.assertEqual(self.ts1.total_overtime, 2)

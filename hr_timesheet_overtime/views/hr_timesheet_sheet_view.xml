@@ -58,40 +58,6 @@
                     decoration-info="total_overtime &gt;= 0"
                 />
             </xpath>
-
-            <!-- FIXME: this is presently broken. the summary page does not
-                 compute unit_amount when changing hours_worked -->
-            <xpath expr="//field[@name='line_ids']" position="attributes">
-                <attribute name="field_value">hours_worked</attribute>
-            </xpath>
-
-            <xpath
-                expr="//field[@name='line_ids']/tree/field[@name='unit_amount']"
-                position="before"
-            >
-                <field name="hours_worked" widget="float_time" />
-            </xpath>
-
-
-            <xpath
-                expr="//field[@name='timesheet_ids']/tree/field[@name='unit_amount']"
-                position="before"
-            >
-                <field
-                    name="hours_worked"
-                    widget="float_time"
-                    string="Hours Worked"
-                    sum="Hours Worked"
-                />
-            </xpath>
-
-            <xpath
-                expr="//field[@name='timesheet_ids']/form//field[@name='unit_amount']"
-                position="before"
-            >
-                <field name="hours_worked" widget="float_time" string="Hours Worked" />
-            </xpath>
-
         </field>
     </record>
 
@@ -128,21 +94,5 @@
 
         </field>
     </record>
-
-    <menuitem
-        name="Overtime"
-        id="menu_hr_timesheet_overtime"
-        sequence="99"
-        parent="hr_timesheet.timesheet_menu_root"
-    />
-
-    <menuitem
-        name="Overtime Rate"
-        id="menu_hr_timesheet_overtime_rate"
-        sequence="100"
-        parent="menu_hr_timesheet_overtime"
-        groups="hr.group_hr_manager"
-        action="action_resource_overtime_form"
-    />
 
 </odoo>

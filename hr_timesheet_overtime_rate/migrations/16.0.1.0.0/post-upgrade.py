@@ -8,7 +8,7 @@ def migrate(cr, version):
     # with sensible data.
     #
     # TODO: Does this run upon module installation? This needs to be run on
-    # module installation as well.
+    # module installation.
     cr.execute(
         # Perfect symmetry is joyous
         """

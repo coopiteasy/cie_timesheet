@@ -15,10 +15,7 @@
         "resource_work_time_from_contracts",
     ],
     "data": [
-        "security/ir.model.access.csv",
-        "views/account_analytic_line_views.xml",
         "views/hr_employee_view.xml",
-        "views/resource_view.xml",
         "views/hr_timesheet_sheet_view.xml",
     ],
     "demo": [

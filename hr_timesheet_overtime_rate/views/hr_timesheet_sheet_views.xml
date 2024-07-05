@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_timesheet_sheet_form" model="ir.ui.view">
+        <field name="name">hr.timesheet.sheet.form</field>
+        <field name="model">hr_timesheet.sheet</field>
+        <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form" />
+        <field name="arch" type="xml">
+
+            <!-- FIXME: this is presently broken. the summary page does not
+                 compute unit_amount when changing hours_worked -->
+            <xpath expr="//field[@name='line_ids']" position="attributes">
+                <attribute name="field_value">hours_worked</attribute>
+            </xpath>
+
+            <xpath
+                expr="//field[@name='line_ids']/tree/field[@name='unit_amount']"
+                position="before"
+            >
+                <field name="hours_worked" widget="float_time" />
+            </xpath>
+
+            <xpath
+                expr="//field[@name='timesheet_ids']/tree/field[@name='unit_amount']"
+                position="before"
+            >
+                <field
+                    name="hours_worked"
+                    widget="float_time"
+                    string="Hours Worked"
+                    sum="Hours Worked"
+                />
+            </xpath>
+
+            <xpath
+                expr="//field[@name='timesheet_ids']/form//field[@name='unit_amount']"
+                position="before"
+            >
+                <field name="hours_worked" widget="float_time" string="Hours Worked" />
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem
+        name="Overtime"
+        id="menu_hr_timesheet_overtime"
+        sequence="99"
+        parent="hr_timesheet.timesheet_menu_root"
+    />
+
+    <menuitem
+        name="Overtime Rate"
+        id="menu_hr_timesheet_overtime_rate"
+        sequence="100"
+        parent="menu_hr_timesheet_overtime"
+        groups="hr.group_hr_manager"
+        action="action_resource_overtime_form"
+    />
+
+</odoo>

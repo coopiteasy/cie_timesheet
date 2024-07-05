@@ -148,8 +148,3 @@ class HrTimesheetSheet(models.Model):
             working_time = employee.get_working_time(start_date, end_date)
             worked_time = sheet.get_worked_time(start_date, end_date)
             sheet.timesheet_overtime_trimmed = worked_time - working_time
-
-    def _get_default_sheet_line(self, matrix, key):
-        result = super()._get_default_sheet_line(matrix, key)
-        result["hours_worked"] = sum(t.hours_worked for t in matrix[key])
-        return result
