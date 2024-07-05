@@ -397,6 +397,9 @@ compatible with <tt class="docutils literal">hr_timesheet_begin_end</tt>, <tt cl
 from <tt class="docutils literal">time_stop</tt> and <tt class="docutils literal">time_start</tt>, and <tt class="docutils literal">unit_amount</tt> must use this
 module’s computation method instead of <tt class="docutils literal">hr_timesheet_begin_end</tt>’s. The
 compatibility layer should go into its own module.</p>
+<p>Furthermore, the summary view of timesheet sheets are set read-only in this
+module. Because of programming complexities, it is not easy to change this view
+to use <tt class="docutils literal">hours_worked</tt> instead of <tt class="docutils literal">unit_amount</tt>.</p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>

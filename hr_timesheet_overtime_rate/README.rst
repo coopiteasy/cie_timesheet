@@ -46,6 +46,10 @@ from ``time_stop`` and ``time_start``, and ``unit_amount`` must use this
 module's computation method instead of ``hr_timesheet_begin_end``'s. The
 compatibility layer should go into its own module.
 
+Furthermore, the summary view of timesheet sheets are set read-only in this
+module. Because of programming complexities, it is not easy to change this view
+to use ``hours_worked`` instead of ``unit_amount``.
+
 Bug Tracker
 ===========
 

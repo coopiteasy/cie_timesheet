@@ -3,7 +3,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 from . import account_analytic_line
-from . import hr_timesheet_sheet
-from . import hr_timesheet_sheet_line
 from . import resource_overtime
 from . import resource_overtime_rate
