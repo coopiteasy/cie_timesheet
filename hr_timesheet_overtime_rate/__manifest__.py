@@ -19,6 +19,7 @@
     "excludes": [],
     "data": [
         "security/ir.model.access.csv",
+        "data/data.xml",
         "views/resource_views.xml",
         "views/account_analytic_line_views.xml",
         "views/hr_timesheet_sheet_views.xml",

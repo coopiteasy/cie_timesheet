@@ -46,3 +46,26 @@ class AnalyticLine(models.Model):
             .rate
             or 1.0
         )
+
+    def _init_hours_worked(self):
+        """Upon module installation (or manually any other time, if you really
+        want), this method is called to populate hours_worked with something
+        sensible, derived from unit_amount and the rate for that day.
+        """
+        # We use an SQL query because we do not want to trigger computation upon
+        # writing to hours_worked.
+        query = """
+            UPDATE account_analytic_line
+            SET hours_worked=CASE
+            """
+        params = []
+
+        for line in self.filtered(lambda item: item.project_id):
+            rate = self.rate_for_date(line.date)
+            hours_worked = line.unit_amount / rate
+            query += "WHEN id=%s THEN %s "
+            params.extend([line.id, hours_worked])
+        query += "END WHERE id IN %s"
+
+        if params:
+            self.env.cr.execute(query, (*params, tuple(line.id for line in self)))
