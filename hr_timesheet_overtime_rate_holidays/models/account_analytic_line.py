@@ -8,8 +8,7 @@ from odoo import models
 class AnalyticLine(models.Model):
     _inherit = "account.analytic.line"
 
-    def get_overtime_rate(self):
-        self.ensure_one()
-        if self.holiday_id:
-            return 1
-        return super().get_overtime_rate()
+    def _update_values(self, values):
+        if not values.get("holiday_id", self.holiday_id):
+            return super()._update_values(values)
+        return

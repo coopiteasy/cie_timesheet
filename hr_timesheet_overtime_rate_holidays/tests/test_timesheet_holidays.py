@@ -17,13 +17,14 @@ class TestTimesheetHolidays(TestCommonTimesheet):
         self.leave_start_datetime = datetime(2018, 2, 5, 7, 0, 0, 0)  # this is monday
         self.leave_end_datetime = self.leave_start_datetime + relativedelta(days=3)
 
-        self.internal_project = self.env.company.internal_project_id
-        self.internal_task_leaves = self.env.company.leave_timesheet_task_id
+        self.internal_project = self.env.user.company_id.leave_timesheet_project_id
+        self.internal_task_leaves = self.env.user.company_id.leave_timesheet_task_id
 
         self.hr_leave_type = self.env["hr.leave.type"].create(
             {
                 "name": "Leave Type",
-                "requires_allocation": "no",
+                "allocation_type": "no",
+                "validity_start": self.leave_start_datetime,
                 "timesheet_generate": True,
                 "timesheet_project_id": self.internal_project.id,
                 "timesheet_task_id": self.internal_task_leaves.id,
@@ -41,11 +42,23 @@ class TestTimesheetHolidays(TestCommonTimesheet):
             }
         )
 
+        # This is necessary because hr_timesheet_overtime depends on
+        # resource_work_time_from_contracts.
+        self.env["hr.contract"].create(
+            {
+                "name": "test",
+                "employee_id": self.empl_employee.id,
+                "wage": 0.0,
+                "resource_calendar_id": self.empl_employee.resource_calendar_id.id,
+                "date_start": "2017-01-01",
+            }
+        )
+
     def test_unit_amount(self):
         number_of_days = (self.leave_end_datetime - self.leave_start_datetime).days
         holiday = (
             self.env["hr.leave"]
-            .with_user(self.user_employee)
+            .sudo(self.user_employee.id)
             .create(
                 {
                     "name": "Leave 1",
