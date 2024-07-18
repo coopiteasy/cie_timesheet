@@ -34,12 +34,12 @@ class AnalyticLine(models.Model):
         # Do not compute/adjust the unit_amount of non-timesheets.
         lines = self.filtered(lambda line: line.project_id)
         for line in lines:
-            line.unit_amount = line.hours_worked * line.rate_for_date(line.date)
+            line.unit_amount = line.hours_worked * line.get_overtime_rate()
 
-    @api.model
-    def rate_for_date(self, date):
+    def get_overtime_rate(self):
+        self.ensure_one()
         # n.b. from_string also works on date objects, returning itself.
-        weekday = fields.Date.from_string(date).weekday()
+        weekday = fields.Date.from_string(self.date).weekday()
         return (
             self.env["resource.overtime.rate"]
             .search([("dayofweek", "=", weekday)], limit=1)
@@ -61,7 +61,7 @@ class AnalyticLine(models.Model):
         params = []
 
         for line in self.filtered(lambda item: item.project_id):
-            rate = self.rate_for_date(line.date)
+            rate = line.get_overtime_rate()
             hours_worked = line.unit_amount / rate
             query += "WHEN id=%s THEN %s "
             params.extend([line.id, hours_worked])
