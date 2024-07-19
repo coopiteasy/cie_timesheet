@@ -8,4 +8,8 @@ from odoo import fields, models
 class Employee(models.Model):
     _inherit = "hr.employee"
 
-    project_ids = fields.Many2many(comodel_name="project.project", string="Projects")
+    project_ids = fields.Many2many(
+        comodel_name="project.project",
+        relation="hr_employee_project_project_rel",
+        string="Projects",
+    )
