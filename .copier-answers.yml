@@ -15,7 +15,8 @@ odoo_test_flavor: OCB
 odoo_version: 12.0
 org_name: Coop IT Easy SC
 org_slug: coopiteasy
-rebel_module_groups: []
+rebel_module_groups:
+- hr_timesheet_sheet_prefill_multi
 repo_description: hr_timesheet modules
 repo_name: cie-timesheet
 repo_slug: cie-timesheet
