@@ -22,7 +22,7 @@ class Sheet(models.Model):
         days = self.get_number_days_between_dates(date_start, date_end)
         for day in range(days):
             date_current = date_start + timedelta(days=day)
-            for project in employee_id.project_ids:
+            for project in employee_id.all_prefill_projects():
                 aal_dict = self._prepare_analytic_line(
                     date_current, project, sheet_id, employee_id.user_id
                 )
