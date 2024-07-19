@@ -10,21 +10,6 @@ from odoo import api, models
 class Sheet(models.Model):
     _inherit = "hr_timesheet.sheet"
 
-    def get_number_days_between_dates(self, date_start, date_end):
-        """
-        Return the number of days between two dates, including both of them.
-
-        Arguments:
-            date_start (date): start date
-            date_end (date): end date
-
-        Returns:
-            int: the number of days between the provided dates
-        """
-        difference = date_end - date_start
-        # return result and add a day
-        return difference.days + 1
-
     @api.model
     def create(self, vals):
         ts = super().create(vals)
@@ -44,6 +29,23 @@ class Sheet(models.Model):
                 ts.write({"timesheet_ids": [(0, 0, aal_dict)]})
         return ts
 
+    @api.model
+    def get_number_days_between_dates(self, date_start, date_end):
+        """
+        Return the number of days between two dates, including both of them.
+
+        Arguments:
+            date_start (date): start date
+            date_end (date): end date
+
+        Returns:
+            int: the number of days between the provided dates
+        """
+        difference = date_end - date_start
+        # return result and add a day
+        return difference.days + 1
+
+    @api.model
     def _prepare_analytic_line(self, date, project, sheet_id, user_id):
         return {
             "project_id": project.id,
