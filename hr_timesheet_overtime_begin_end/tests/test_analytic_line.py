@@ -64,3 +64,11 @@ class TestAnalyticLine(SavepointCase):
         # The rate was already applied on the transient record. Don't also apply
         # it on creation.
         self.assertEqual(line_record.unit_amount, 4.0)
+
+    def test_rate_applied_if_no_times(self):
+        line = self.base_line()
+        del line["time_start"]
+        del line["time_stop"]
+        line["unit_amount"] = 1
+        line_record = self.env["account.analytic.line"].create(line)
+        self.assertEqual(line_record.unit_amount, 2)

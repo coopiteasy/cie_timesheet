@@ -26,7 +26,12 @@ class AnalyticLine(models.Model):
     # functions instead of the aforementioned methods.
     @api.model
     def _update_values(self, values):
-        return
+        time_start = values.get("time_start", self.time_start)
+        time_stop = values.get("time_stop", self.time_stop)
+        # Do not double-compute if we're using times.
+        if time_start or time_stop:
+            return
+        return super()._update_values(values)
 
     def unit_amount_from_start_stop(self):
         result = super().unit_amount_from_start_stop()
