@@ -71,6 +71,7 @@
                     decoration-warning="total_overtime &lt; 0"
                     decoration-info="total_overtime &gt;= 0"
                 />
+                <field name="current_resource_calendar_id" />
             </xpath>
 
         </field>

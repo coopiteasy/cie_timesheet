@@ -177,11 +177,6 @@ msgid "Overtime Start Date to compute overtime"
 msgstr ""
 
 #. module: hr_timesheet_overtime
-#: model:ir.model.fields,field_description:hr_timesheet_overtime.field_hr_timesheet_sheet__total_overtime
-msgid "Overtime Total"
-msgstr ""
-
-#. module: hr_timesheet_overtime
 #: model:ir.model.fields,help:hr_timesheet_overtime.field_hr_timesheet_sheet__daily_overtime
 msgid "Overtime for the current day"
 msgstr ""
@@ -194,11 +189,6 @@ msgstr ""
 #. module: hr_timesheet_overtime
 #: model:ir.model.fields,help:hr_timesheet_overtime.field_hr_timesheet_sheet__timesheet_overtime_trimmed
 msgid "Overtime for this timesheet period, from the employee's start date until today"
-msgstr ""
-
-#. module: hr_timesheet_overtime
-#: model:ir.model.fields,help:hr_timesheet_overtime.field_hr_timesheet_sheet__total_overtime
-msgid "Overtime total since employee's overtime start date"
 msgstr ""
 
 #. module: hr_timesheet_overtime
@@ -263,12 +253,18 @@ msgstr ""
 
 #. module: hr_timesheet_overtime
 #: model:ir.model.fields,field_description:hr_timesheet_overtime.field_hr_employee__total_overtime
+#: model:ir.model.fields,field_description:hr_timesheet_overtime.field_hr_timesheet_sheet__total_overtime
 msgid "Total Overtime"
 msgstr ""
 
 #. module: hr_timesheet_overtime
 #: model:ir.model.fields,help:hr_timesheet_overtime.field_hr_employee__total_overtime
-msgid "Total Overtime since Overtime Start Date"
+msgid "Total overtime since Overtime Start Date"
+msgstr ""
+
+#. module: hr_timesheet_overtime
+#: model:ir.model.fields,help:hr_timesheet_overtime.field_hr_timesheet_sheet__total_overtime
+msgid "Total overtime since employee's overtime start date"
 msgstr ""
 
 #. module: hr_timesheet_overtime
@@ -294,5 +290,15 @@ msgstr ""
 #. module: hr_timesheet_overtime
 #: model:ir.model.fields,field_description:hr_timesheet_overtime.field_hr_timesheet_sheet__working_time
 msgid "Working Hours"
+msgstr ""
+
+#. module: hr_timesheet_overtime
+#: model:ir.model.fields,field_description:hr_timesheet_overtime.field_hr_timesheet_sheet__current_resource_calendar_id
+msgid "Working Schedule"
+msgstr ""
+
+#. module: hr_timesheet_overtime
+#: model:ir.model.fields,help:hr_timesheet_overtime.field_hr_timesheet_sheet__current_resource_calendar_id
+msgid "Working schedule of the current day"
 msgstr ""
 
