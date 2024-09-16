@@ -6,7 +6,7 @@ looking _exclusively_ at the corresponding day of the week. This should be more
 robust.
 
 Because ``unit_amount`` is computed from ``hours_worked``, this module is not
-compatible with ``hr_timesheet_begin_end``.To make this module subsequently
+compatible with ``hr_timesheet_begin_end``. To make this module subsequently
 compatible with ``hr_timesheet_begin_end``, ``hours_worked`` must be computed
 from ``time_stop`` and ``time_start``, and ``unit_amount`` must use this
 module's computation method instead of ``hr_timesheet_begin_end``'s. The

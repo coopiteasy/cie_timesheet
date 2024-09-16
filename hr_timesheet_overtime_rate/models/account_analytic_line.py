@@ -38,8 +38,7 @@ class AnalyticLine(models.Model):
 
     def get_overtime_rate(self):
         self.ensure_one()
-        # n.b. from_string also works on date objects, returning itself.
-        weekday = fields.Date.from_string(self.date).weekday()
+        weekday = self.date.weekday()
         return (
             self.env["resource.overtime.rate"]
             .search([("dayofweek", "=", weekday)], limit=1)
