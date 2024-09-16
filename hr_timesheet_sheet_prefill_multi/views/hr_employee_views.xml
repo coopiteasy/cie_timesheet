@@ -17,8 +17,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         />
         <field name="arch" type="xml">
             <field name="project_ids" position="after">
-                <field name="timesheet_prefill_ids">
-                    <tree string="Prefill Projects" editable="bottom">
+                <field name="timesheet_prefill_ids" string="Projects">
+                    <tree editable="bottom">
                         <field name="sequence" widget="handle" />
                         <field name="project_project_id" />
                     </tree>
