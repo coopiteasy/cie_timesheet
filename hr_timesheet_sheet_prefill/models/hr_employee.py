@@ -12,9 +12,11 @@ class Employee(models.Model):
         comodel_name="project.project",
         relation="hr_employee_project_project_rel",
         string="Projects",
+        domain=[("active", "=", True)],
     )
 
-    # This exists solely for extension in hr_timesheet_sheet_prefill_multi.
+    # This exists solely extension in hr_timesheet_sheet_prefill_multi, and also
+    # to filter out inactive projects.
     def all_prefill_projects(self):
         self.ensure_one()
-        return self.project_ids
+        return self.project_ids.filtered(lambda project: project.active)

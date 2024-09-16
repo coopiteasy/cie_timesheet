@@ -16,10 +16,18 @@ class HrEmployee(models.Model):
     )
 
     def all_prefill_projects(self):
-        self.ensure_one()
-        # The only purpose of the below code is to sort the projects according
-        # to the sequence of the prefill records.
-        projects = self.env["project.project"].browse()
-        for prefill in self.timesheet_prefill_ids.sorted():
-            projects += prefill.project_project_id
-        return projects
+        projects = super().all_prefill_projects()
+        # By searching, we get prefills sorted by sequence.
+        prefills = self.env["hr_timesheet.sheet.prefill"].search(
+            [
+                ("project_project_id", "in", projects.ids),
+                ("hr_employee_id", "=", self.id),
+            ]
+        )
+        # Instead of doing `prefills.mapped("project_project_id")`, we manually
+        # create the recordset. This is because the recordset MAY contain
+        # duplicates, and `mapped()` removes duplicates.
+        result = self.env["project.project"]
+        for prefill in prefills:
+            result += prefill.project_project_id
+        return result

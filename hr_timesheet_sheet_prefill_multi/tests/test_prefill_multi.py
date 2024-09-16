@@ -27,6 +27,29 @@ class TestPrefillMulti(TransactionCase):
             }
         )
 
+    def test_all_prefill_projects_filtered_sorted(self):
+        """Prefill projects are sorted and filtered."""
+        project_03 = self.env["project.project"].create({"name": "Project 03"})
+        self.project_02.active = False
+
+        self.employee.timesheet_prefill_ids = [
+            (0, False, {"project_project_id": self.project_01.id, "sequence": 1}),
+            (0, False, {"project_project_id": self.project_02.id, "sequence": 2}),
+            (0, False, {"project_project_id": project_03.id, "sequence": 3}),
+        ]
+        sheet = self.env["hr_timesheet.sheet"].create(
+            {
+                "employee_id": self.employee.id,
+                "date_start": "2024-01-01",
+                "date_end": "2024-01-01",
+            }
+        )
+        self.assertEqual(len(sheet.timesheet_ids), 2)
+        used_projects = sheet.timesheet_ids.mapped("project_id")
+        self.assertIn(self.project_01, used_projects)
+        self.assertNotIn(self.project_02, used_projects)
+        self.assertIn(project_03, used_projects)
+
     def test_project_ids_still_works(self):
         """You can still use project_ids on hr.employee as normally. It will
         create prefill records.
@@ -62,9 +85,9 @@ class TestPrefillMulti(TransactionCase):
     def test_sequenced_repeated_prefills(self):
         """You can repeat and sequence prefills."""
         self.employee.timesheet_prefill_ids = [
-            (0, False, {"project_project_id": self.project_01, "sequence": 1}),
-            (0, False, {"project_project_id": self.project_02, "sequence": 2}),
-            (0, False, {"project_project_id": self.project_01, "sequence": 3}),
+            (0, False, {"project_project_id": self.project_01.id, "sequence": 1}),
+            (0, False, {"project_project_id": self.project_02.id, "sequence": 2}),
+            (0, False, {"project_project_id": self.project_01.id, "sequence": 3}),
         ]
 
         # Sanity check.
