@@ -1,2 +1,3 @@
+freezegun
 git+https://github.com/coopiteasy/addons@12.0#subdirectory=setup/resource_work_time_from_contracts
 git+https://github.com/coopiteasy/addons@12.0#subdirectory=setup/company_today
