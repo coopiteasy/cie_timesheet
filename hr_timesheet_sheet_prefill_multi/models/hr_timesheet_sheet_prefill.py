@@ -30,8 +30,8 @@ class HrTimesheetSheetPrefill(models.Model):
         ondelete="cascade",
         required=True,
     )
-
     sequence = fields.Integer(string="Sequence", default=10)
+    active = fields.Boolean(related="project_project_id.active")
 
     @api.model_cr
     def init(self):
