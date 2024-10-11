@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_timesheet_line_tree" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree.hr_timesheet</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field
+                    name="hours_worked"
+                    widget="timesheet_uom"
+                    decoration-danger="hours_worked &gt; 24 or hours_worked &lt; 0"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_timesheet_line_pivot" model="ir.ui.view">
+        <field name="name">account.analytic.line.pivot</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.view_hr_timesheet_line_pivot" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field name="hours_worked" type="measure" widget="timesheet_uom" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_timesheet_line_graph" model="ir.ui.view">
+        <field name="name">account.analytic.line.graph</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.view_hr_timesheet_line_graph" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field name="hours_worked" type="measure" widget="timesheet_uom" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_timesheet_line_graph_my" model="ir.ui.view">
+        <field name="name">account.analytic.line.graph</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.view_hr_timesheet_line_graph_my" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field name="hours_worked" type="measure" widget="timesheet_uom" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_timesheet_line_graph_all" model="ir.ui.view">
+        <field name="name">account.analytic.line.graph</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.view_hr_timesheet_line_graph_all" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field name="hours_worked" type="measure" widget="timesheet_uom" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_timesheet_line_form" model="ir.ui.view">
+        <field name="name">account.analytic.line.form</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field
+                    name="hours_worked"
+                    widget="timesheet_uom"
+                    decoration-danger="hours_worked &gt; 24"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_kanban_account_analytic_line" model="ir.ui.view">
+        <field name="name">account.analytic.line.kanban</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.view_kanban_account_analytic_line" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='unit_amount']" position="before">
+                <field name="hours_worked" widget="timesheet_uom" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
