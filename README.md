@@ -27,7 +27,8 @@ addon | version | maintainers | summary
 [hr_timesheet_project_prevent_creation](hr_timesheet_project_prevent_creation/) | 12.0.1.0.0 | [![carmenbianca](https://github.com/carmenbianca.png?size=30px)](https://github.com/carmenbianca) | Prevent creation of projects and tasks from timesheets.
 [hr_timesheet_search_all_tasks](hr_timesheet_search_all_tasks/) | 12.0.1.0.0 |  | Allow to search through all tasks in a timesheet line
 [hr_timesheet_sheet_current](hr_timesheet_sheet_current/) | 12.0.1.0.0 |  | Allow to access the current timesheet sheet directly from the menu
-[hr_timesheet_sheet_prefill](hr_timesheet_sheet_prefill/) | 12.0.1.0.0 |  | Prefill a timesheet sheet with daily timesheets
+[hr_timesheet_sheet_prefill](hr_timesheet_sheet_prefill/) | 12.0.1.1.0 |  | Prefill a timesheet sheet with daily timesheets
+[hr_timesheet_sheet_prefill_multi](hr_timesheet_sheet_prefill_multi/) | 12.0.1.0.0 | [![carmenbianca](https://github.com/carmenbianca.png?size=30px)](https://github.com/carmenbianca) | Allow duplicates in prefill templates.
 [hr_timesheet_sheet_tag](hr_timesheet_sheet_tag/) | 12.0.1.0.0 |  | Tag your analytic line in the timesheet sheet view.
 [hr_timesheet_tag](hr_timesheet_tag/) | 12.0.1.0.0 |  | Tag your timesheet activity.
 [hr_timesheet_task_change_project](hr_timesheet_task_change_project/) | 12.0.1.0.1 |  | Allow to change the project of a timesheet of a task.
