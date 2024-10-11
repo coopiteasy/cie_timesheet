@@ -4,7 +4,7 @@
 
 {
     "name": "Timesheet Sheet prefill",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.1.0",
     "category": "Human Resources",
     "summary": "Prefill a timesheet sheet with daily timesheets",
     "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
