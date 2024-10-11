@@ -8,10 +8,12 @@
     <!-- Part time-->
     <record id="resource_calendar_part_time1" model="resource.calendar">
         <field name="name">4/5</field>
+        <field name="attendance_ids" eval="False" />
     </record>
 
     <record id="resource_calendar_part_time2" model="resource.calendar">
         <field name="name">1/5</field>
+        <field name="attendance_ids" eval="False" />
     </record>
 
     <!-- Working Hours 4/5 -->

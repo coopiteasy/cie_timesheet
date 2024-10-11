@@ -25,7 +25,7 @@ class HrEmployee(models.Model):
     total_overtime = fields.Float(
         string="Total Overtime",
         compute="_compute_total_overtime",
-        help="Total Overtime since Overtime Start Date",
+        help="Total overtime since Overtime Start Date",
         store=True,
     )
     timesheet_sheet_ids = fields.One2many(

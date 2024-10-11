@@ -44,9 +44,15 @@ class HrTimesheetSheet(models.Model):
         store=True,
     )
     total_overtime = fields.Float(
-        "Overtime Total",
+        "Total Overtime",
         related="employee_id.total_overtime",
-        help="Overtime total since employee's overtime start date",
+        help="Total overtime since employee's overtime start date",
+    )
+    current_resource_calendar_id = fields.Many2one(
+        "resource.calendar",
+        string="Working Schedule",
+        help="Working schedule of the current day",
+        compute="_compute_current_resource_calendar_id",
     )
 
     def get_worked_time(self, start_date, end_date=None):
@@ -156,3 +162,15 @@ class HrTimesheetSheet(models.Model):
             working_time = employee.get_working_time(start_date, end_date)
             worked_time = sheet.get_worked_time(start_date, end_date)
             sheet.timesheet_overtime_trimmed = worked_time - working_time
+
+    @api.multi
+    @api.depends(
+        "company_id.today",
+        "employee_id.contract_ids.resource_calendar_id",
+    )
+    def _compute_current_resource_calendar_id(self):
+        today = self.company_id.today
+        for sheet in self:
+            sheet.current_resource_calendar_id = (
+                sheet.employee_id.get_calendar_for_date(today)
+            )
