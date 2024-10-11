@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2024 Coop IT Easy SC
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+  <record id="view_task_form2_inherited" model="ir.ui.view">
+    <field
+            name="name"
+        >project.task.form.inherited (in hr_timesheet_overtime_rate)</field>
+    <field name="model">project.task</field>
+    <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited" />
+    <field name="priority" eval="100" />
+    <field name="arch" type="xml">
+        <xpath
+                expr="//field[@name='timesheet_ids']/tree/field[@name='unit_amount']"
+                position="before"
+            >
+          <field name="hours_worked" widget="float_time" />
+      </xpath>
+      <xpath
+                expr="//field[@name='timesheet_ids']/form/sheet/group/field[@name='unit_amount']"
+                position="before"
+            >
+          <field name="hours_worked" widget="float_time" />
+      </xpath>
+    </field>
+  </record>
+</odoo>
