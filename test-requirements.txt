@@ -1,3 +1,4 @@
 freezegun
+git+https://github.com/coopiteasy/timesheet.git@12.0-backport-refactor-begin-end#subdirectory=setup/hr_timesheet_activity_begin_end
 git+https://github.com/coopiteasy/addons@12.0#subdirectory=setup/resource_work_time_from_contracts
 git+https://github.com/coopiteasy/addons@12.0#subdirectory=setup/company_today
