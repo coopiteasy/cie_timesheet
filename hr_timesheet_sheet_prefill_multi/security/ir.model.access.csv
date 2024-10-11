@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_timesheet_sheet_prefill_user,hr_timesheet.sheet.prefill.user,model_hr_timesheet_sheet_prefill,base.group_user,1,1,1,1
