@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* hr_timesheet_sheet_prefill_multi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__active
+msgid "Active"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model,name:hr_timesheet_sheet_prefill_multi.model_hr_employee
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__hr_employee_id
+msgid "Employee"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,help:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__active
+msgid "If the active field is set to False, it will allow you to hide the project without removing it."
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_employee__timesheet_prefill_ids
+msgid "Prefill Projects"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__project_project_id
+msgid "Project"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model_terms:ir.ui.view,arch_db:hr_timesheet_sheet_prefill_multi.hr_timesheet_default_analytic_account_view_employee_form
+msgid "Projects"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model.fields,field_description:hr_timesheet_sheet_prefill_multi.field_hr_timesheet_sheet_prefill__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: hr_timesheet_sheet_prefill_multi
+#: model:ir.model,name:hr_timesheet_sheet_prefill_multi.model_hr_timesheet_sheet_prefill
+msgid "Timesheet prefill line"
+msgstr ""
+
